@@ -1,0 +1,70 @@
+.parent{
+  width:100%
+}
+
+.child{
+  display: table;
+  margin: 0 auto;
+}
+
+ #list{
+  max-height:1000px;
+  overflow-y:auto;
+  width: 600px;
+  height: 800px;
+  align-items: center;
+  text-align: center;
+}
+
+.listButton{
+  height: 20px;
+  width: 50px;
+  margin-top: 4px;
+}
+
+#submit{
+  margin-bottom: 8px;
+}
+
+#viewMusicBtn{
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#listholder{
+  border: 3px solid black;
+}
+
+ul {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: auto;
+  padding: 0;
+}
+
+li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+ul, li {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+li:last-child {
+  border: none;
+}
+
+li a {
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+  width: 600px;
+
+}
+
+li a:hover {
+  background: #f6f6f6;
+}

@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <title>Music!</title>
+  <meta name="An app to find music!" content="An app to find music!">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+  <div id="content" class="parent">
+    <div id="inner" class="child">
+    <div id="title" class="child">
+      <H2 id="titleTxt">Get A Music Suggestion</H2>
+      <H3 id="subTitleTxt">Enter an Artist and Song  Title</H3>
+    </div>
+    <br>
+    <div id="txtBoxes" class="child">
+      <form id="inputForm" method="POST" onsubmit="callupdate()">
+        <label for="artistName">Artist: </label>
+        <input id="artistName" name="aName" type="text" />
+        <label for="songName">Song Name: </label>
+        <input id="songName" name="sName" type="text" />
+        <br>
+        <br>
+        <button class="child" id="submit" type="button" onclick="callupdate()">Submit</button>
+      </form>
+      <p class="child">Note: Leaving the song name blank will result in artist suggestions</p>
+      <button class="child" id="viewMusicBtn" type="button" onclick="showUserMusic()">View Saved Items</button>
+    </div>
+    <div id="listholder" class="child">
+      <div id="list">
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+<script>
+
+      function callfillupdate(artist, song){
+        document.getElementById('artistName').value = artist;
+        document.getElementById('songName').value = song;
+          $.ajax({
+             url: "/update",
+             type: "get",
+             data: {artist, song},
+            success: function(response) {
+            $("#list").html(response);
+            },
+           error: function(xhr) {
+             //Do Something to handle error
+            }
+          });
+      }
+
+      function showUserMusic(){
+        $.ajax({
+           url: "/showUserMusic",
+           type: "get",
+          success: function(response) {
+          $("#list").html(response);
+          },
+         error: function(xhr) {
+           //Do Something to handle error
+          }
+        });
+      }
+
+      function callupdate(){
+        console.log("update");
+        var artist = document.getElementById('artistName').value;
+        var song = document.getElementById('songName').value;
+        console.log(artist + " " + song);
+          $.ajax({
+             url: "/update",
+             type: "get",
+             data: {artist, song},
+            success: function(response) {
+            $("#list").html(response);
+            },
+           error: function(xhr) {
+             //Do Something to handle error
+            }
+          });
+
+     }
+
+     function callsave(index){
+       console.log(index);
+       var data = document.getElementById('li'+index).outerHTML;
+       $.ajax({
+          url: "/save",
+          type: "get",
+          data: {data},
+         success: function(response) {
+         console.log(data + " (saved)");
+         },
+        error: function(xhr) {
+          //Do Something to handle error
+         }
+       });
+     }
+ </script>
+</html>
